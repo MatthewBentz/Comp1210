@@ -1,0 +1,174 @@
+/** Defines Icosahedron objects.
+ *Project 4 pt. 1
+ *@mlb0119 Matthew Bentz
+ *@version 9/19/18
+ */
+import java.text.DecimalFormat;
+
+ /**Class. */
+public class Icosahedron {
+   
+   //INSTANCE VARIABLES
+   
+   private String label = "";
+   private String color = "";
+   private double edge = 0;
+   private static int count = 0;
+   
+   //CONSTRUCTOR 
+   
+   /**Constructor for Class. 
+    *@param labelIn Returns String.
+    *@param colorIn Returns String.
+    *@param edgeIn Returns double.
+    */
+    
+   public Icosahedron(String labelIn, String colorIn, double edgeIn) {
+   
+      setLabel(labelIn);
+      setColor(colorIn);
+      setEdge(edgeIn);
+      count++;
+      
+   }
+  
+  //METHODS
+  
+   /**Accessor method @return String for shape label. */
+   
+   public String getLabel() {
+      return label;
+   }
+   
+   /**Accessor method @return count for number of icos created. */
+   
+   public static int getCount() {
+      return count;
+   }
+   
+   /**Mutator method that sets the count to zero. */
+   
+   public static void resetCount() {
+      count = 0;
+   }
+   
+   /**Method that returns false if object is not an icosahedron. 
+    *@return true or false if object is equals to Icosahedron.
+    *@param obj placeholder for comparison. */
+   
+   public boolean equals(Object obj) {
+      if (!(obj instanceof Icosahedron)) {
+         return false;
+      } else {
+         Icosahedron d = (Icosahedron) obj;
+         return (label.equalsIgnoreCase(d.getLabel())
+                  && color.equalsIgnoreCase(d.getColor())
+                  && Math.abs(edge - d.getEdge()) < 0.000001);
+      }
+   }
+   
+   /**Required by checkstyle?? @return int 0 */
+   
+   public int hashCode() {
+      return 0;
+   }
+   
+   /**Accessor method @return String for color of shape. */
+   
+   public String getColor() {
+      return color;
+   }
+   
+   /**Accessor method @return double for edge value.*/
+   
+   public double getEdge() {
+      return edge;
+   }
+   
+   /**Method that returns true or false, mutator for edge.
+   *@return Returns boolean.
+   *@param edgeIn instance double for mutator method. */
+   
+   public boolean setEdge(double edgeIn) {
+      if (edgeIn > 0) {
+         edge = edgeIn;
+         return true;
+      } else {
+         return false;
+      }
+   }
+   
+   /**Method that returns true or false, mutator for label.
+   *@return Returns boolean.
+   *@param labelIn instance string for mutator method. */
+   
+   public boolean setLabel(String labelIn) {
+      if (labelIn != null) {
+         label = labelIn.trim();
+         return true;
+      } else {
+         return false;
+      }
+   }
+   
+   /**Method that returns true or false, mutator for color.
+   *@return Returns 
+   *@param colorIn Instance string for mutator method. */
+   
+   public boolean setColor(String colorIn) {
+      if (colorIn != null) {
+         color = colorIn.trim();
+         return true;
+      } else {
+         return false;
+      }
+   }
+   
+   /**Method to find double surface area.
+   *@return Returns */
+   
+   public double surfaceArea() {
+      double surfaceArea = 5 * Math.sqrt(3) * Math.pow(edge, 2);
+      return surfaceArea;
+   }
+   
+   /**Method to find double volume.
+   *@return Returns */
+   
+   public double volume() {
+      double volume = (5 * (3 + Math.sqrt(5))) / 12;
+      volume *= Math.pow(edge, 3);
+      return volume;
+   }
+   
+   /**Method to find double surface/volume ratio.
+    *@return Returns */
+    
+   public double surfaceToVolumeRatio() {
+      double surfaceToVolumeRatio = surfaceArea() / volume();
+      return surfaceToVolumeRatio;
+   }
+   /**Method to convert data into String.
+    *@return Returns the string. */
+    
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("#,##0.0#####");
+      String statement = "";
+      statement = "Icosahedron \"" + getLabel() + "\" is \""
+         + getColor() + "\" with 30 edges of length " + getEdge() + " units.\n"
+         + "\tsurface area = " + df.format(surfaceArea())
+         + " square units\n" + "\tvolume = " + df.format(volume())
+         + " cubic units\n" + "\tsurface/volume ratio = "
+         + df.format(surfaceToVolumeRatio()) + "\n";
+   
+      /**System.out.print("Icosahedron \"" + getLabel() + "\" is \""
+         + getColor() + "\" with 30 edges of length " + getEdge()
+          + " units.\n");
+      System.out.println("\tsurface area = " + df.format(surfaceArea())
+         + " square units");
+      System.out.println("\tvolume = " + df.format(volume()) + " cubic units");
+      System.out.println("\tsurface/volume ratio = "
+         + df.format(surfaceToVolumeRatio())); */
+      return statement;
+   }
+}
