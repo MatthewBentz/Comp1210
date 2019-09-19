@@ -1,0 +1,78 @@
+/**Grade class defines variables and methods to use in GradeGenerator.
+ *Activity 4B
+ *@mlb0119
+ *@version 9/24/18
+ */
+ 
+public class Grade {
+
+ //instance variables
+   private double exam1;
+   private double exam2;
+   private double finalExam;
+   private double activityAvg;
+   private double quizAvg;
+   private double projectAvg;
+   private String studentName;
+   /**Static values for exam scores and weights. */
+   public static final int EXAM_1 = 1, EXAM_2 = 2, FINAL = 3;
+   private static final double EXAM_WEIGHT = 0.15,
+      FINAL_WEIGHT = 0.30, ACT_WEIGHT = 0.05,
+      QUIZ_WEIGHT = 0.10, PROJ_WEIGHT = 0.25;
+   
+   /**Constructor method Grade which accepts student's name as parameter.
+      @param studentNameIn instance variable to set student name. */
+   public Grade(String studentNameIn) {
+      studentName = studentNameIn;
+   }
+   
+   /**Command method (void) for setting activity and quiz averages.
+      @param activityAvgIn instance variable for use
+      in the mutator method to change values. 
+      @param quizAvgIn instance variable for use
+      in the mutator method to change values. */
+   public void setLabAverages(double activityAvgIn, double quizAvgIn) {
+      activityAvg = activityAvgIn;
+      quizAvg = quizAvgIn;
+   }
+   
+   /**Command method (void) for setting project average. 
+      @param projectAvgIn instance variable for use in setting projectAvg.*/
+   public void setProjectAvg(double projectAvgIn) {
+      projectAvg = projectAvgIn;
+   }
+   
+   /**Command method (void) for setting the exam and final scores.
+      @param examType instance variable used in setting
+      exam scores for use in calculateGrade method.
+      @param examScoreIn instance variable used in setting
+      exam scores for use in calculateGrade method. */
+   public void setExamScore(int examType, double examScoreIn) {
+      if (examType == EXAM_1) {
+         exam1 = examScoreIn;
+      } else if (examType == EXAM_2) {
+         exam2 = examScoreIn;
+      } else if (examType == FINAL) {
+         finalExam = examScoreIn;
+      }
+   }
+   
+   /**Public method that returns double after calculating
+      the average grade for the class.
+      @return grade returns the user's average grade for the class. */
+   public double calculateGrade() {
+      double grade = exam1 * EXAM_WEIGHT + exam2 * EXAM_WEIGHT
+         + finalExam * FINAL_WEIGHT
+         + activityAvg * ACT_WEIGHT
+         + quizAvg * QUIZ_WEIGHT
+         + projectAvg * PROJ_WEIGHT;
+      return grade;
+   }
+   
+   /**public class to print student's name and grade average as a string.
+      @return returns string to be printed. */
+   public String toString() {
+      return "Name: " + studentName + "\n"
+         + "Course Grade: " + calculateGrade();
+   }
+}
