@@ -1,0 +1,14 @@
+/**Subclass for exception. 
+ *Project 11
+ *@mlb0119
+ *@version 11.28.18 */
+ 
+ 
+ /** Subclass. */
+public class InvalidCategoryException extends Exception {
+   /** Constructor.
+    *@param ch invalid string line. */
+   public InvalidCategoryException(String ch) {
+      super(ch + " *** invalid category ***");
+   }
+}
