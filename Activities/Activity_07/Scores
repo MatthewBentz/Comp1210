@@ -1,0 +1,100 @@
+/** Using arrays to create a Scores.
+ *Activity 7
+ *@mlb0119 Matthew Bentz
+ *@version 10/15/18
+ */
+ /**Stop being mean Checkstyle :(. */
+public class Scores {
+   private int[] numbers;
+   
+   /**Constructor method with @param numbersIn equals numbers. */
+   public Scores(int[] numbersIn) {
+      numbers = numbersIn;
+   }
+   
+   /**Accessor method for evens in array. 
+    *@return returns an array of even integers. */
+   public int[] findEvens() {
+      int numberEvens = 0;
+      
+      for (int i = 0; i < numbers.length; i++) {
+         if (numbers[i] % 2 == 0) {
+            numberEvens++;
+         }
+      }
+      
+      int[] evens = new int[numberEvens];
+      int count = 0;
+      for (int i = 0; i < numbers.length; i++) {
+         if (numbers[i] % 2 == 0) {
+            evens[count] = numbers[i];
+            count++;
+         }
+      }
+      
+      return evens;
+   }
+   
+   /**Accessor method for odds in an array.
+    *@return returns an array of odd integers. */
+   public int[] findOdds() {
+      int numbersOdd = 0;
+      
+      for (int i = 0; i < numbers.length; i++) {
+         if (numbers[i] % 2 == 1) {
+            numbersOdd++;
+         }
+      }
+      
+      int[] odds = new int[numbersOdd];
+      int count = 0;
+      for (int i = 0; i < numbers.length; i++) {
+         if (numbers[i] % 2 == 1) {
+            odds[count] = numbers[i];
+            count++;
+         }
+      }
+      
+      return odds;
+   }
+    
+    /**Method that calculates average of numbers in array.
+     *@return returns value of average as double. */
+   public double calculateAverage() {
+      int sum = 0;
+      
+      for (int i = 0; i < numbers.length; i++) {
+         sum += numbers[i];
+      }
+      double dSum = sum;
+      double dLength = numbers.length;
+      return dSum / dLength;
+   }
+    
+    /**Method that turns int array into string. 
+     *@return */
+   public String toString() {
+      String result = "";
+      
+      for (int i = 0; i < numbers.length; i++) {
+         result += numbers[i] + "\t";
+      }
+      
+      return result;
+   }
+     
+    /**Method for returning values of string in reverse.
+     *@return */
+   public String toStringInReverse() {
+      String result = "";
+      
+      for (int i = numbers.length - 1; i >= 0; i--) {
+         result += numbers[i] + "\t";
+      }
+      
+      return result;
+   }
+    
+    
+ 
+}
