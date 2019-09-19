@@ -1,0 +1,51 @@
+/**Application that reads data and and prints it out.
+ *Project 5
+ *@mlb0119 Matthew Bentz
+ *@version 10/5/18
+ */
+ 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
+ 
+ /**Main class for application. */
+public class IcosahedronListApp {
+   
+   /**Main method. @param args Argument command line not used. 
+    *@throws FileNotFoundException makes sure file exists. */
+   public static void main(String[] args) throws FileNotFoundException {
+      
+      ArrayList<Icosahedron> scannedIcos = new ArrayList<Icosahedron>();
+      
+      Scanner scan = new Scanner(System.in);
+      System.out.print("Enter file name: ");
+      String fileName = scan.nextLine();
+      
+      Scanner scanFile = new Scanner(new File(fileName));
+      
+      String icosahedronListName = scanFile.nextLine();
+      
+      while (scanFile.hasNext()) {
+         
+         String label = scanFile.nextLine();
+         String color = scanFile.nextLine();
+         double edge = Double.parseDouble(scanFile.nextLine());
+         
+         Icosahedron i = new Icosahedron(label, color, edge);
+         scannedIcos.add(i);
+         
+      }
+      scanFile.close();
+      
+      IcosahedronList myIcoList = 
+         new IcosahedronList(icosahedronListName, scannedIcos);
+      
+      System.out.println("\n" + myIcoList.toString());
+      
+      System.out.print(myIcoList.summaryInfo() + "\n");
+   }
+ 
+ 
+ 
+}
