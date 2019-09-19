@@ -1,0 +1,27 @@
+/** Program prints individual's name with short, medium, and long term goals.
+ *Project_01
+ *@author mlb0119 Matthew Bentz
+ *@version 8/29/18
+ */
+public class MyLifeGoals
+{
+   /** Method includes system print statements for the goals.
+   @param args Command line arguments - not used in this program.
+   */
+   public static void main(String[]args)
+   {
+      System.out.println("Matthew Bentz\n");
+      System.out.println("My short-term goals include going to "
+         + "the gym 3 times this week, limiting my outgoing food "
+         + "spending by $50, and completing my work for all of my "
+         + "classes. To know when I'm successful with my short-term "
+         + "goals, I make all of them measurable numerically and "
+         + "with certainty.");
+      System.out.println("My medium-term goals in life include "
+         + "graduating college to find a job I like and moving to "
+         + "the city of Pittsburgh to be with my family.");
+      System.out.println("My long-term goals in life are to be "
+         + "able to retire at a decent age, to help the world out in "
+         + "some way, and to watch a happy family grow.");
+   }
+}
