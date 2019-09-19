@@ -1,0 +1,61 @@
+/** BlueDiamondCardholder child class of DiamondCardholder. 
+ *Project 9
+ *@mlb0119
+ *@version 11/10/18 */
+ 
+import java.text.DecimalFormat;
+ 
+ /** Child class of DiamondCardholder. */
+public class BlueDiamondCardholder extends DiamondCardholder {
+   private int bonusPurchasePoints = 2500;
+   
+   /** Constructor. 
+    *@param acctNumberIn for account number.
+    *@param nameIn for account name. */
+   public BlueDiamondCardholder(String acctNumberIn, String nameIn) {
+      super(acctNumberIn, nameIn);
+      category = "Blue Diamond Cardholder";
+      discountRate = 0.10;
+   }
+   
+   /** Method to set the bonus points.
+    *@param pointsIn for new value of bonus points. */
+   protected void setBonusPurchasePoints(int pointsIn) {
+      bonusPurchasePoints = pointsIn;
+   }
+   
+   /** Method to get the bonus points.
+    *@return purchase points as int. */
+   protected int getBonusPurchasePoints() {
+      return bonusPurchasePoints;
+   }
+   
+   /** Overrides purchase points in diamond.
+    *@return purchase points as 5 times purchases. */
+   protected int purchasePoints() {
+      int points = (int) Math.floor(totalPurchases());
+      points *= 5;
+      if (totalPurchases() > 2500) {
+         points += bonusPurchasePoints;
+         return points;
+      } else {
+         return points;
+      }
+   }
+   
+   /** Overrides diamond toString to include bonus purchase points.
+    *@return returns info as string. */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("0.0%");
+      DecimalFormat df1 = new DecimalFormat("$#,##0.00");
+      DecimalFormat df2 = new DecimalFormat("#,##0");
+      String bonus = "\n(includes " + df2.format(bonusPurchasePoints)
+               + " bonus points added to Purchase Points)";
+      if (totalPurchases() > 2500) {
+         return super.toString() + bonus;
+      } else {
+         return super.toString();
+      }
+   }
+ 
+}
