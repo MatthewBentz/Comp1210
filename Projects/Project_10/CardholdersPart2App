@@ -1,0 +1,29 @@
+/** Class that contains the main method. 
+ *Project 10
+ *@mlb0119
+ *@version 11.16.18 */
+
+import java.io.FileNotFoundException;
+ /** Class. */
+public class CardholdersPart2App {
+
+  /**Main method.
+   *@param args used for writing in file name.
+   *@throws FileNotFoundException for files not found. */
+   public static void main(String[] args) throws FileNotFoundException {
+      String fileName = null;
+      if (args.length > 0) {
+         fileName = args[0];
+      } else {
+         System.out.println("File name expected as command line argument."
+            + "\nProgram ending.");
+      }
+      CardholderProcessor cp = new CardholderProcessor();
+      if (fileName != null) {
+         cp.readCardholderFile(fileName);
+         System.out.print(cp.generateReport());
+         System.out.print(cp.generateReportByName());
+         System.out.print(cp.generateReportByCurrentBalance());
+      }
+   }
+}
