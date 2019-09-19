@@ -1,0 +1,25 @@
+import org.junit.Assert;
+//import static org.junit.Assert.*;
+//import org.junit.Before;
+import org.junit.Test;
+import java.io.FileNotFoundException;
+
+/** Class. */
+public class CardholdersPart2AppTest {
+   /** Method for main test. */
+   @Test public void mainTest() {
+      try {
+         String[] args1 = {};
+         CardholdersPart2App.main(args1);
+         Assert.assertEquals("Empty String", args1.length, 0);
+      
+         CardholdersPart2App app = new CardholdersPart2App();
+      
+         String[] args2 = {"cardholder_data_1.txt"};
+         CardholdersPart2App.main(args2);
+      //Assert.assertEquals("File test", true, CardholdersPart2App.main(args2));
+      } catch (FileNotFoundException fnfe) {
+         
+      }
+   }
+}
