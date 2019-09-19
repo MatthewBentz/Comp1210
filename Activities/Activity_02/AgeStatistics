@@ -1,0 +1,48 @@
+/** Program collects user input and shows their age and maximun heart rate.
+ *Activity 2
+ *@author mlb0119 Matthew Bentz 
+ *@version 9/5/18
+ */
+//imports the tool for user input
+import java.util.Scanner;
+/** Creates the class for age statistics.
+*/
+public class AgeStatistics {
+   /** Method provides functionality for user input.
+    *@param args Command line arguments - not used.
+    */
+   public static void main(String[]args) {
+   /** Sets up the scanner for user input, creates variables for program
+    */
+      Scanner userInput = new Scanner(System.in);
+      String name = "";
+      int ageInYears = 0;
+      int gender = 0;
+      double maxHeartRate = 0;
+      //prompts the user for their name
+      System.out.print("Enter your name: ");
+      name = userInput.nextLine();
+      //prompts the user for their age
+      System.out.print("Enter your age in years: ");
+      ageInYears = userInput.nextInt();
+      //prompts the user for their gender
+      System.out.print("Enter your gender (1 for female and 0 for male): ");
+      gender = userInput.nextInt();
+      //converts age to minutes and centuries
+      System.out.println("\tYour age in minutes is "
+         + ageInYears * 525600 + " minutes.");
+      System.out.println("\tYour age in centuries is " 
+         + (double) ageInYears / 100 + " centuries.");
+      //displays max heart rate
+      if (gender == 1) { //female MHR
+         maxHeartRate = 209 - (0.7 * ageInYears);
+      }
+      else { //male MHR
+         maxHeartRate = 214 - (0.8 * ageInYears);
+      }
+      System.out.print("Your max heart rate is " + maxHeartRate
+         + " beats per minute.");
+      
+      
+   }
+}
