@@ -1,0 +1,148 @@
+/** Class that provides methods for reading in files and generating reports.
+ *Project 10
+ *@mlb0119
+ *@version 11.14.18 */
+ 
+import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.Scanner;
+ 
+ /** Class. */
+public class CardholderProcessor {
+
+   /** Fields. */
+   private Cardholder[] cArr;
+   private String[] invalidArr;
+   
+   /** Constructor. */
+   public CardholderProcessor() {
+      cArr = new Cardholder[0];
+      invalidArr = new String[0];
+   }
+   
+   /** Method to get cardholder array.
+    *@return cardholder array. */
+   public Cardholder[] getCardholdersArray() {
+      return cArr;
+   }
+   
+   /** Method to return invalid array.
+    *@return invalid array. */
+   public String[] getInvalidRecordsArray() {
+      return invalidArr;
+   }
+   
+   /** Method to add a new cardholder.
+    *@param newCard is new cardholder. */
+   public void addCardholder(Cardholder newCard) {
+      cArr = Arrays.copyOf(cArr, cArr.length + 1);
+      cArr[cArr.length - 1] = newCard;
+   }
+   
+   /** Method to add invalid record.
+    *@param newRecord is the added array object. */
+   public void addInvalidRecord(String newRecord) {
+      invalidArr = Arrays.copyOf(invalidArr, invalidArr.length + 1);
+      invalidArr[invalidArr.length - 1] = newRecord;
+   }
+   
+   /** Method to read in cardholder data file.
+    *@param fileName name of file read in.
+    *@throws FileNotFoundException for files not found. */
+   public void readCardholderFile(String fileName) 
+                                    throws FileNotFoundException {
+      //scanner for file lines                              
+      Scanner scanLine = new Scanner(new File(fileName));
+      
+      //scans while line has next
+      while (scanLine.hasNextLine()) {
+         //scans lines separated by semicolon delimiiter
+         Scanner value = new Scanner(scanLine.nextLine());
+         value.useDelimiter(";");
+         //reads in values to create cardholder object
+         String category = value.next();
+         String acctNumber = value.next();
+         String name = value.next();
+         //String prevBalanceString = value.next();
+         double prevBalance = Double.parseDouble(value.next());
+         //String paymentString = value.next();
+         double payment = Double.parseDouble(value.next());
+         //creates purchases array
+         double[] purchases = new double[0];
+         //determines type by category code
+         if (category.equals("1")) {
+            category = "Sapphire Cardholder";
+            Cardholder c = new SapphireCardholder(acctNumber, name);
+            c.setPrevBalance(prevBalance);
+            c.setPayment(payment);
+            for (int i = 0; value.hasNext(); i++) {
+               c.addPurchases(value.nextDouble());  
+            }
+            addCardholder(c);
+         } else if (category.equals("2")) {
+            category = "Diamond Cardholder";
+            Cardholder c = new DiamondCardholder(acctNumber, name);
+            c.setPrevBalance(prevBalance);
+            c.setPayment(payment);
+            for (int i = 0; value.hasNext(); i++) {
+               c.addPurchases(value.nextDouble());  
+            }
+            addCardholder(c);
+         } else if (category.equals("3")) {
+            category = "Blue Diamond Cardholder";
+            Cardholder c = new BlueDiamondCardholder(acctNumber, name);
+            c.setPrevBalance(prevBalance);
+            c.setPayment(payment);
+            for (int i = 0; value.hasNext(); i++) {
+               c.addPurchases(value.nextDouble());  
+            }
+            addCardholder(c);
+         }
+      }
+   }
+      
+      /** Method for generating a report.
+       *@return report as string. */
+   public String generateReport() {
+      String output = "----------------------------\n"
+            + "Monthly Cardholder Report\n"
+            + "----------------------------\n";
+      for (int i = 0; i < cArr.length; i++) {
+         output += cArr[i].toString() + "\n\n";
+      }
+      return output;
+   }
+   
+   /** Method to generate report by name.
+    *@return report as a string. */
+   public String generateReportByName() {
+      String output = "--------------------------------------\n"
+            + "Monthly Cardholder Report (by Name)\n"
+            + "--------------------------------------\n";
+            
+      Arrays.sort(cArr);
+      
+      for (int i = 0; i < cArr.length; i++) {
+         output += cArr[i].toString() + "\n\n";
+      }
+      return output;
+   }
+   
+   /** Method to generate report by current balance.
+    *@return report as a string. */
+   public String generateReportByCurrentBalance() {
+      String output = "---------------------------------------\n"
+            + "Monthly Cardholder Report (by Current Balance)\n"
+            + "---------------------------------------\n";
+            
+      Arrays.sort(cArr, new CurrentBalanceComparator());
+      
+      for (int i = 0; i < cArr.length; i++) {
+         output += cArr[i].toString() + "\n\n";
+      }
+      return output;
+   }
+   
+}
+      
