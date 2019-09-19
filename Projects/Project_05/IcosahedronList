@@ -1,0 +1,158 @@
+/** Icosahedron List pulls file names.
+ *Project 5
+ *@mlb0119 Matthew Bentz
+ *@version 10/3/18
+ */
+import java.util.ArrayList;
+import java.text.DecimalFormat;
+
+ 
+ 
+ /** Javadoc comment for checkstyle to stop being mean.*/
+public class IcosahedronList {
+   private String listOfIcosahedrons = "";
+   private ArrayList<Icosahedron> icoList = new ArrayList<Icosahedron>();
+   
+   /** constructor.
+    *@param listOfIcosahedronsIn temp placement for list.
+    *@param icoListIn temp placement for array. */
+   public IcosahedronList(String listOfIcosahedronsIn,
+       ArrayList<Icosahedron> icoListIn) {
+      listOfIcosahedrons = listOfIcosahedronsIn;
+      icoList = icoListIn;
+   }
+   
+   /** accessor method for name.
+    *@return returns name in String. */
+   public String getName() {
+      return listOfIcosahedrons;
+   }
+   
+   /** accessor method for number of icosahedrons.
+    *@return returns int value for numoficos. */
+   public int numberOfIcosahedrons() {
+      if (icoList.size() > 0) {
+         return icoList.size();
+      } else {
+         return 0;
+      }
+   }
+      
+   /** adds total surface areas for all icosahedrons.
+    *@return returns double for total surface area. */
+   public double totalSurfaceArea() {
+      double totalSurfaceArea = 0;
+      if (icoList.size() > 0) {
+         int index = 0;
+         while (index < icoList.size()) {
+            totalSurfaceArea += icoList.get(index).surfaceArea();
+            index++;
+         }
+         return totalSurfaceArea;
+      } else {
+         return totalSurfaceArea;
+      }   
+   } 
+   
+   /** adds all icosahedron volumes.
+    *@return returns double for calculated total volume. */
+   public double totalVolume() {
+      double totalVolume = 0;
+      if (icoList.size() > 0) {
+         int index = 0;
+         while (index < icoList.size()) {
+            totalVolume += icoList.get(index).volume();
+            index++;
+         }
+         return totalVolume;
+      } else {
+         return totalVolume;
+      }
+   }
+   
+   /** calculates the value of the avg. surface area.
+    *@return returns average surface area as double. */
+   public double averageSurfaceArea() {
+      double totalSurfaceArea = 0;
+      double averageSurfaceArea = 0;
+      if (icoList.size() > 0) {
+         int index = 0;
+         while (index < icoList.size()) {
+            totalSurfaceArea += icoList.get(index).surfaceArea();
+            index++;
+         }
+         averageSurfaceArea = totalSurfaceArea / icoList.size();
+         return averageSurfaceArea;
+      } else {
+         return averageSurfaceArea;
+      }
+   }
+   
+   /** calculates the average volume and returns it as a double.
+    *@return returns double for average volume. */
+   public double averageVolume() {
+      double averageVolume = 0;
+      double totalVolume = 0;
+      if (icoList.size() > 0) {
+         int index = 0;
+         while (index < icoList.size()) {
+            totalVolume += icoList.get(index).volume();
+            index++;
+         }
+         totalVolume /= icoList.size();
+         return totalVolume;
+      } else {
+         return totalVolume;
+      }
+   }
+   
+   /** calculates average surface to volume ratio and returns double.
+    *@return returns average surface to volume ratio as double. */
+   public double averageSurfaceToVolumeRatio() {
+      double totalSurfaceToVolumeRatio = 0;
+      double averageSurfaceToVolumeRatio = 0;
+      if (icoList.size() > 0) {
+         int index = 0;
+         while (index < icoList.size()) {
+            totalSurfaceToVolumeRatio += 
+               icoList.get(index).surfaceToVolumeRatio();
+            index++;
+         }
+         averageSurfaceToVolumeRatio = 
+            totalSurfaceToVolumeRatio / icoList.size();
+         return averageSurfaceToVolumeRatio;
+      } else { 
+         return averageSurfaceToVolumeRatio;
+      }
+   }
+   
+   /**returns a String containing the name of the list with each Icosahedron.
+    *@return returns the icosahedron info as String. */
+   public String toString() {
+      String result = listOfIcosahedrons + "\n\n";
+      int index = 0;
+      while (icoList.size() != 0 && index < icoList.size()) {
+         result += icoList.get(index).toString() + "\n";
+         index++;
+      } 
+      return result;
+   }
+   
+   /**returns a String containing the name of the list with summary items.
+    *@return returns a string containing summary info. */
+   public String summaryInfo() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      
+      String result = "----- Summary for " + listOfIcosahedrons + " -----\n";
+      result += "Number of Icosahedrons: " + icoList.size() + "\n";
+      result += "Total Surface Area: " + df.format(totalSurfaceArea()) + "\n";
+      result += "Total Volume: " + df.format(totalVolume()) + "\n";
+      result += "Average Surface Area: "
+          + df.format(averageSurfaceArea()) + "\n";
+      result += "Average Volume: " + df.format(averageVolume()) + "\n";
+      result += "Average Surface/Volume Ratio: "
+          + df.format(averageSurfaceToVolumeRatio());
+      return result;
+         
+   }
+}
