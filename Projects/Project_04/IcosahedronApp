@@ -1,0 +1,43 @@
+/**IcosahedronApp uses Icosahedron.java methods to create the object.
+ *Project 4 pt. 2
+ *@mlb0119 Matthew Bentz
+ *@version 9/21/18
+ */
+ 
+import java.util.Scanner;
+
+/**Class for applying data into ouput. */
+
+public class IcosahedronApp {
+ 
+ /**Main method. @param args not used. */
+ 
+   
+   public static void main(String[] args) {
+      Scanner scan = new Scanner(System.in);
+      Icosahedron example1 = new Icosahedron("Small", "blue", 0.01);
+      example1.toString();
+      
+      String label;
+      String color;
+      double edge;
+      
+      System.out.println("Enter label, color, and "
+         + "edge length for an icosahedron.");
+      System.out.print("\tlabel: ");
+      label = scan.nextLine();
+      System.out.print("\tcolor: ");
+      color = scan.nextLine();
+      System.out.print("\tedge: ");
+      edge = scan.nextDouble();
+      if (edge <= 0) {
+         System.out.print("Error: edge must be greater than 0.");
+      } else {
+         System.out.print("\n");
+         Icosahedron userIco = new Icosahedron(label, color, edge);
+         System.out.print(userIco.toString());
+      }
+   }
+ 
+ 
+}
