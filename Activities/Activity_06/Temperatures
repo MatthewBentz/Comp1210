@@ -1,0 +1,68 @@
+/** Temperatures through input.
+ *Activity 6
+ *@mlb0119 Matthew Bentz
+ *@version 10/8/18
+ */
+import java.util.ArrayList;
+ 
+ /**Main class for temp arrays. */
+public class Temperatures {
+ 
+   private ArrayList<Integer> temperatures = new ArrayList<Integer>();
+   
+   /**Constructor which accepts temp arrays as params.
+    *@param temperaturesIn placeholder for array list. */
+   public Temperatures(ArrayList<Integer> temperaturesIn) {
+      temperatures = temperaturesIn;
+      
+   }
+   
+   /**Accessor method for low temp. @return returns low temp as int. */
+   public int getLowTemp() {
+      if (temperatures.isEmpty()) {
+         return 0;
+      }
+      int low = temperatures.get(0);
+      for (int i = 0; i < temperatures.size(); i++) {
+         if (temperatures.get(i) < low) {
+            low = temperatures.get(i);
+         }
+      }
+      return low;
+   }
+   
+   /**Accessor method for low temp. @return returns high temp as int. */
+   public int getHighTemp() {
+      if (temperatures.isEmpty()) {
+         return 0;
+      }
+      int high = temperatures.get(0);
+      for (Integer temp : temperatures) {
+         if (temp > high) {
+            high = temp;
+         }
+      }
+      return high;
+   }
+   
+   /**Takes temp parameter and returns lower minimum. 
+    *@return returns int. 
+    *@param lowIn input value for calculation. */
+   public int lowerMinimum(int lowIn) {
+      return lowIn < getLowTemp() ? lowIn : getLowTemp();
+   }
+   
+   /**Takes temp parameter and returns higher minimum. 
+    *@return returns int. 
+    *@param highIn input value for calculation. */
+   public int higherMaximum(int highIn) {
+      return highIn > getHighTemp() ? highIn : getHighTemp();
+   }
+   
+   /**Method to convert list to string. @return returns string for printing.*/
+   public String toString() {
+      return "\tTemperatures: " + temperatures
+         + "\n\tLow: " + getLowTemp()
+         + "\n\tHigh: " + getHighTemp();
+   }
+}
