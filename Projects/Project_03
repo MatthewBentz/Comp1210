@@ -1,0 +1,43 @@
+/** This program will compute a value through mathematical expressions.
+ *Project 3 pt. 1
+ *@mlb0119 Matthew Bentz
+ *@version 9/12/18
+ */
+ /**importing scanner for input of value X
+  and the class for formatting decimals.
+  */
+import java.text.DecimalFormat;
+import java.util.Scanner;
+/**Defining class as the formula evaluator.
+*/
+public class FormulaEval {
+   /** Main method used for equations.
+    *@param args Command Line arguments (unused)
+    */
+   public static void main(String[]args) {
+      double x;
+      double result;
+      int rightChar;
+      int leftChar;
+      Scanner scan = new Scanner(System.in);
+      //put in any value for x to be evaluated
+      System.out.print("Enter a value for x: ");
+      x = scan.nextDouble();
+      //the maths!
+      result = Math.abs((3.9 * Math.pow(x, 5)) - (Math.pow(x, 3)) + 1);
+      result = Math.sqrt(result);
+      result += 1000 * x;
+      result /= ((1.6 * Math.pow(x, 2)) + (2.7 * x) + 3.8);
+      //the result
+      System.out.println("Result: " + result);
+      //converting to a string to find #'s indexed of decimal
+      String resultString = new String(Double.toString(result));
+      System.out.println("# of characters to left of decimal point: " 
+         + resultString.indexOf("."));
+      System.out.println("# of characters to right of decimal point: "
+         + (resultString.length() - resultString.indexOf(".") - 1));
+      //converting to decimal format
+      DecimalFormat df = new DecimalFormat("#,##0.0####");
+      System.out.println("Formatted Result: " + df.format(result));
+   }
+}
