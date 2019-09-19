@@ -1,0 +1,140 @@
+/** Program that uses static and instance variables.
+ *Activity 8A
+ *@mlb0119 Matthew Bentz
+ *@version 10/22/18
+ */
+ 
+ 
+public class BankLoan {
+	// constant fields
+   private static final int MAX_LOAN_AMOUNT = 100000;
+   private static int loansCreated = 0;
+
+   // instance variables (can be used within the class)
+   private String customerName;
+   private double balance, interestRate;
+   
+   /**Constructor to create a bank loan. 
+   *@param customerNameIn reassigns to customer's name.
+   *@param interestRateIn defines interest rate for customer.
+   */
+   public BankLoan(String customerNameIn, double interestRateIn) { 
+      customerName = customerNameIn;
+      interestRate = interestRateIn;
+      balance = 0;
+      loansCreated++;
+   }
+   
+   /**Mutator method that sets an amount to borrow.
+   *@param amount is the amount borrowed as a double. 
+   *@return value is true/false to make loan is valid.
+   */
+   public boolean borrowFromBank(double amount) {
+      
+      boolean wasLoanMade = false;
+      
+      if (balance + amount < MAX_LOAN_AMOUNT) {
+         wasLoanMade = true;
+         balance += amount;
+      }
+   
+      return wasLoanMade;
+   }
+
+   /**Mutator method to make payment towards declining loan balance.
+   *@param amountPaid is the amount put towards loan as double.
+   *@return returns the new debt balance.
+   */
+   public double payBank(double amountPaid) {
+      double newBalance = balance - amountPaid;
+      if (newBalance < 0) {
+         balance = 0;
+         // paid too much, return the overcharge
+         return Math.abs(newBalance);
+      }
+      else {
+         balance = newBalance;
+         return 0;
+      }
+   }
+   
+   /** Accessor method to get current balance of a loan.
+   *@return balance returns the value as a double.
+   */
+   public double getBalance() {
+      return balance;
+   }
+   
+   /**Mutator method to change the interest rate declared when
+   *the loan was made. 
+   *@param interestRateIn is the value for the new interest rate.
+   *@return makes sure the value is valid through boolean expression.
+   */
+   public boolean setInterestRate(double interestRateIn) {
+   
+      if (interestRateIn >= 0 && interestRateIn <= 1) {
+         interestRate = interestRateIn;
+         return true;
+      }
+      else {
+         return false;
+      }
+   }
+   
+   /**Accessor method to get the current interest rate.
+   *@return value is the current interest rate as a double.
+   */
+   public double getInterestRate() {
+      return interestRate;
+   }
+   
+   /**Mutator method to charge interest on the loan.
+   *uses declared interest rate.
+   */
+   public void chargeInterest() {
+      balance = balance * (1 + interestRate);
+   }
+   
+   /**To String method shows all of the loans information as string.
+   *@return value returns the output as string.
+   */
+   public String toString() {
+      String output = "Name: " + customerName + "\r\n" 
+         + "Interest rate: " + interestRate + "%\r\n" 
+         + "Balance: $" + balance + "\r\n";
+      return output;
+   }
+   
+   /**Static method for finding if the amount in parameters is valid.
+   *@param amount is the compared amount as a double.
+   *@return amount is true or false if valid or not.
+   */
+   public static boolean isAmountValid(double amount) {
+      return amount >= 0;
+   }
+   
+   /**Static method for finding if the customer is in debt.
+   *@param loan is the declared loan you are comparing.
+   *@return value is T/F for whether or not they are in debt.
+   */
+   public static boolean isInDebt(BankLoan loan) {
+      if (loan.getBalance() > 0) {
+         return true;
+      }
+      return false;
+   }
+   
+   /**Accessor method for getting the amount of loans created.
+   *@return returns this value as an integer.
+   */
+   public static int getLoansCreated() {
+      return loansCreated;
+   }
+   
+   /**Mutator method that sets the loans created to 0.
+   */
+   public static void resetLoansCreated() {
+      loansCreated = 0;
+   }
+
+}
