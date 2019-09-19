@@ -1,0 +1,77 @@
+/** Customer program. 
+ *Activity 8B
+ *@mlb0119 Matthew Bentz
+ *@version 10/29/18
+ */
+ 
+import java.text.DecimalFormat;
+ 
+ /**Class to store variables. */
+public class Customer implements Comparable<Customer> {
+   
+   private String name;
+   private String location;
+   private double balance;
+   
+   /** Constructor that initializes a customer.
+    *@param nameIn reassigns parameter to name string. */
+   public Customer(String nameIn) {
+      name = nameIn;
+      location = "";
+      balance = 0;
+   }
+   
+   /**Mutator method for location.
+    *@param locationIn new String set as location. */
+   public void setLocation(String locationIn) {
+      location = locationIn;
+   }
+   
+   /**Overloaded setLocation method.
+    *@param city String for city.
+    *@param state String for state. */
+   public void setLocation(String city, String state) {
+      location = city + ", " + state;
+   }
+   
+   /**Mutator method for balance.
+    *@param amount the new balance. */
+   public void changeBalance(double amount) {
+      balance += amount;
+   }
+   
+   /** Accessor method for location.
+    *@return location as string. */
+   public String getLocation() {
+      return location;
+   }
+   
+   /** Accessor method for balance.
+    *@return balance as double. */
+   public double getBalance() {
+      return balance;
+   }
+   
+   /**Method to put info in String.
+    *@return returns info in 3 lines as String. */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("0.0");
+      return name + "\n" + location + "\n" + "$" + df.format(balance);
+   }
+   
+   /** Compare to method. 
+    *@param obj is used to compare.
+    *@return returns an int of -1, 0, or 1 depending on balance. */
+   public int compareTo(Customer obj) {
+      if (Math.abs(this.balance - obj.getBalance()) < 0.000001) {
+         return 0;
+      }
+      else if (this.balance < obj.getBalance()) {
+         return -1;
+      }
+      else {
+         return 1;
+      }
+   }
+   
+}
