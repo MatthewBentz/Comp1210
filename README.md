@@ -1,2 +1,2 @@
 # Comp1210
-Fundamentals of Computing I with Dr. Cross at Auburn University
+Fundamentals of Computing 1 with Dr. Cross at Auburn University
