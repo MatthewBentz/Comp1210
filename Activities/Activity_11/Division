@@ -1,0 +1,33 @@
+/**Class with division vocabulary.
+ *Activity 11
+ *@mlb0119
+ *@version 11.26.18 */
+ 
+
+/** Class. */
+public class Division {
+   /** Integer divide method.
+    *@param num numerator.
+    *@param den is denominator.
+    *@return is result from division. */
+   public static int intDivide(int num, int den) {
+      try {
+         return num / den;
+      }
+      catch (ArithmeticException e) {
+         return 0;
+      }
+   }
+   
+   /**Method to divide with floating point.
+    *@param num numerator.
+    *@param den denominator.
+    *@return result from division. */
+   public static double decimalDivide(int num, int den) {
+      if (den == 0) {
+         throw new IllegalArgumentException("The denominator "
+               + "cannot be zero.");
+      }
+      return (double) num / (double) den;
+   }
+}
