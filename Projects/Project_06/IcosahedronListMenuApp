@@ -1,0 +1,125 @@
+/** Menu application for Icosahedrons.
+ *Project 6
+ *@mlb0119 Matthew Bentz
+ *@version 10/10/18
+ */
+ 
+import java.util.Scanner; 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+ 
+ /**I hate checkstyle. */
+public class IcosahedronListMenuApp {
+   
+   /**@param args not used.
+    *@throws FileNotFoundException makes sure file exists.*/
+   public static void main(String[] args) throws FileNotFoundException {
+     
+      String iListName = "list not found";
+      ArrayList<Icosahedron> myList = new ArrayList<Icosahedron>();
+      IcosahedronList myIList = new IcosahedronList(iListName, myList);
+      String fileName = "file not found";
+      
+      String color, label;
+      double edge;
+      
+      String code = "";
+      
+      Scanner scan = new Scanner(System.in);
+      
+      System.out.println("Icosahedron List System Menu\n"
+         + "R - Read File and Create Icosahedron List\n"
+         + "P - Print Icosahedron List\n"
+         + "S - Print Summary\n"
+         + "A - Add Icosahedron\n"
+         + "D - Delete Icosahedron\n"
+         + "F - Find Icosahedron\n"
+         + "E - Edit Icosahedron\n"
+         + "Q - Quit");
+         
+      do {
+         System.out.print("Enter Code [R, P, S, A, D, F, E, or Q]: ");
+         code = scan.nextLine();
+         if (code.length() == 0) {
+            continue;
+         }
+         code = code.toUpperCase();
+         char codeChar = code.charAt(0);
+         switch (codeChar) {
+            case 'R': 
+               System.out.print("\tFile name: ");
+               fileName = scan.nextLine();
+               
+               myIList = myIList.readFile(fileName);
+               
+               System.out.println("\tFile read in and "
+                  + "Icosahedron List created\n");
+               
+               break;
+            case 'P':
+               System.out.print(myIList.toString());
+               break;
+            case 'S':
+               System.out.println("\n" + myIList.summaryInfo() + "\n");
+               break;
+            case 'A':
+               System.out.print("\tLabel: ");
+               label = scan.nextLine();
+               System.out.print("\tColor: ");
+               color = scan.nextLine();
+               System.out.print("\tEdge: ");
+               edge = Double.parseDouble(scan.nextLine());
+               
+               myIList.addIcosahedron(label, color, edge);
+               
+               System.out.println("\t*** Icosahedron added ***\n");
+               break;
+            case 'D':
+               System.out.print("\tLabel: ");
+               String labelDelete = scan.nextLine();
+               if (myIList.findIcosahedron(labelDelete) != null) {
+                  myIList.deleteIcosahedron(labelDelete);
+                  System.out.println("\t\"" + labelDelete + "\" deleted\n");
+               } else {
+                  System.out.println("\t\"" + labelDelete + "\" not found\n");
+               }
+               break;
+            case 'F':
+               System.out.print("\tLabel: ");
+               String labelFind = scan.nextLine();
+               if (myIList.findIcosahedron(labelFind)
+                                                != null) {
+                  System.out.print(myIList.findIcosahedron(labelFind)
+                                          .toString() + "\n");
+               } else {
+                  System.out.println("\t\"" + labelFind + "\" not found\n");
+               }
+               break;
+            case 'E':
+               System.out.print("\tLabel: ");
+               String labelEdit = scan.nextLine();
+               System.out.print("\tColor: ");
+               color = scan.nextLine();
+               System.out.print("\tEdge: ");
+               edge = scan.nextDouble();
+               
+               if (myIList.editIcosahedron(labelEdit, color, edge)) {
+                  System.out.println("\t\"" + labelEdit
+                                     + "\" successfully edited\n");
+               } else {
+                  System.out.println("\t\"" + labelEdit + "\" not found\n");
+               }
+               break;
+            case 'Q':
+               break;
+            default:
+               System.out.println("\t*** invalid code ***\n");
+               break;
+         }
+         
+         
+      } while (!code.equalsIgnoreCase("Q"));
+     
+   }
+   
+}
