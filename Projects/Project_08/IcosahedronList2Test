@@ -1,0 +1,273 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import java.text.DecimalFormat;
+import java.io.FileNotFoundException;
+
+/** Test Class. */
+public class IcosahedronList2Test {
+
+
+   /** Fixture initialization (common initialization
+    *  for all tests). **/
+   @Before public void setUp() {
+   }
+   
+   /** method to test get methods and calculation methods. */
+   @Test public void gettersTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[0];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2("Test List Null",
+         nullArray, 0);
+      
+      Assert.assertEquals("Get Name Test", "Test List", icoList.getName());
+      Assert.assertEquals("Get List Test", icoArray, icoList.getList());
+      Assert.assertEquals("Get numOfIcos Test", 3,
+         icoList.numberOfIcosahedrons());
+      Assert.assertEquals("Get numOfIcos when 0", 0,
+         icoListNull.numberOfIcosahedrons());
+      Assert.assertEquals("Surface Area Test", 1498.2239,
+         icoList.totalSurfaceArea(), 0.0001);
+      Assert.assertEquals("Surface Area Test when 0", 0,
+         icoListNull.totalSurfaceArea(), 0.0000001);
+      Assert.assertEquals("Volume Test", 4060.1343,
+         icoList.totalVolume(), 0.0001);
+      Assert.assertEquals("Volume Test when 0", 0,
+         icoListNull.totalVolume(), 0.0001);
+      Assert.assertEquals("Avg. Surface Area Test", 499.4079,
+         icoList.averageSurfaceArea(), 0.0001);
+      Assert.assertEquals("Avg. Surface Area Test when 0", 0,
+         icoListNull.averageSurfaceArea(), 0.0001);
+      Assert.assertEquals("Avg. Volume Test", 1353.3781,
+         icoList.averageVolume(), 0.0001);
+      Assert.assertEquals("Avg. Volume Test when 0", 0,
+         icoListNull.averageVolume(), 0.0001);
+      Assert.assertEquals("Avg. Surface/Volume", 1.0364,
+         icoList.averageSurfaceToVolumeRatio(), 0.0001);
+      Assert.assertEquals("Avg. Surface/Volume when 0", 0,
+         icoListNull.averageSurfaceToVolumeRatio(), 0.0001);
+   }
+   
+   /** method to test methods that return string values. */
+   @Test public void stringsTest() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[0];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List", icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2("Test List Null",
+         nullArray, 0);
+      
+      Assert.assertEquals("toString Test", true, icoList.toString().contains(
+                  "Test List\n\n" + icoArray[0].toString() + "\n"
+                   + icoArray[1].toString() + "\n" 
+                   + icoArray[2].toString() + "\n"));
+      Assert.assertEquals("toString Test when numOfIcos = 0", true, 
+         icoListNull.toString().contains("Test List Null\n\n"));
+      Assert.assertEquals("Summary Info test", true, icoList.summaryInfo()
+                   .contains("----- Summary for " + icoList.getName()
+                   + " -----\n"));
+   }
+   
+   /** Method to test the readFile method.
+    @throws FileNotFoundException xd. */
+   @Test public void readFileTest() throws FileNotFoundException {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      IcosahedronList2 icoListNull2 = new IcosahedronList2(
+         "Test List for reading file", nullArray, 0);
+      
+      icoListNull.readFile("icosahedron_data_1.txt");
+      Assert.assertEquals("File with objects", 3,
+         icoListNull.numberOfIcosahedrons());
+      
+      icoList.readFile("icosahedron_data_0.txt");
+      Assert.assertEquals("File with no objects", 3,
+         icoList.numberOfIcosahedrons());
+   }
+   
+   /** Method to test the addIcosahedron method. */
+   @Test public void addIcoTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2("Test List Null",
+         nullArray, 0);
+      
+      icoListNull.addIcosahedron("Test", "Blue", 1);
+      Assert.assertEquals("Added Ico", "Test", nullArray[0].getLabel());
+      icoListNull.addIcosahedron("Test2", "Yellow", 8);
+      Assert.assertEquals("Added Ico 2", "Test2", nullArray[1].getLabel());
+   }
+   
+   /** Method to test the findIcosahedron method. */
+   @Test public void findIcosahedronTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Found", icoArray[1],
+         icoList.findIcosahedron("Medium"));
+      Assert.assertEquals("Not Found", null,
+         icoListNull.findIcosahedron("n/a"));
+   }
+   
+   /** Method to test the deleteIcosahedron method. */
+   @Test public void deleteIcosahedronTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Deleted", icoArray[1],
+         icoList.deleteIcosahedron("Medium"));
+      
+      icoList.deleteIcosahedron("Medium");
+      Assert.assertEquals("Deleted2", icoArray[1],
+         icoList.findIcosahedron("Large"));
+      
+      icoList.deleteIcosahedron("Large");
+      Assert.assertEquals("Deleted3", null, icoArray[1]);
+   }
+   
+   /** Method to test the editIcosahedron method. */
+   @Test public void editIcosahedronTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      icoList.editIcosahedron("Small", "White", 3);
+      Assert.assertEquals("Edited color", "White", icoArray[0].getColor());
+      Assert.assertEquals("Edited edge", 3, icoArray[0].getEdge(), 0.0001);
+      
+      Assert.assertEquals("not found", false,
+         icoList.editIcosahedron("big", "x", 1));
+      
+   }
+   
+   /** Method to test the shortestEdge method. */
+   @Test public void shortestEdgeTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Short Ico pass", icoArray[0],
+         icoList.findIcosahedronWithShortestEdge());
+      Assert.assertEquals("Short Ico fail", null,
+         icoListNull.findIcosahedronWithShortestEdge());
+   }
+   
+   /** Method to test the longest edge method. */
+   @Test public void longestEdgeTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Long Ico pass", icoArray[2],
+         icoList.findIcosahedronWithLongestEdge());
+      Assert.assertEquals("Long Ico fail", null,
+         icoListNull.findIcosahedronWithLongestEdge());
+   }
+   
+   /** Method to test the smallest volume method. */
+   @Test public void smallestVolumeTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Small Volume pass", icoArray[0],
+         icoList.findIcosahedronWithSmallestVolume());
+      Assert.assertEquals("Small Volume fail", null,
+         icoListNull.findIcosahedronWithSmallestVolume());
+   }
+   
+   /** Method to test the largest volume method. */
+   @Test public void largestVolumeTest() {
+      Icosahedron[] icoArray = new Icosahedron[100];
+      Icosahedron[] nullArray = new Icosahedron[10];
+      icoArray[0] = new Icosahedron("Small", "Red", 2);
+      icoArray[1] = new Icosahedron("Medium", "Navy", 5);
+      icoArray[2] = new Icosahedron("Large", "Orange", 12);
+      
+      IcosahedronList2 icoList = new IcosahedronList2("Test List",
+         icoArray, 3);
+      IcosahedronList2 icoListNull = new IcosahedronList2(
+         "Test List Null", nullArray, 0);
+      
+      Assert.assertEquals("Large Volume pass", icoArray[2],
+         icoList.findIcosahedronWithLargestVolume());
+      Assert.assertEquals("Large Volume fail", null,
+         icoListNull.findIcosahedronWithLargestVolume());
+      
+   }
+
+
+   /** A test that always fails.
+   @Test public void defaultTest() {
+      Assert.assertEquals("Default test added by jGRASP. Delete "
+            + "this test once you have added your own.", 0, 1);
+   }  **/
+}
