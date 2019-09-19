@@ -1,0 +1,87 @@
+/** This program sorts out the information of football tickets.
+ *Project 3 pt. 2
+ *@mlb0119 Matthew Bentz
+ *@version 9/12/18
+ */
+ //importing user input method and decimal format class
+import java.text.DecimalFormat;
+import java.util.Scanner;
+ /**main and only class for the program, football tickets.
+ */
+public class FootballTicket {
+ /**static value of discounts.
+ */
+   static final double STUDENT_DISCOUNT = 0.33;
+   static final double FACULTY_STAFF_DISCOUNT = 0.80;
+   /** main method to convert the inputted string.
+    *@param args Command Line arguments (unused).
+    */
+   public static void main(String[]args) {
+   /** Main method for sorting the info.
+    */
+    //declaring variables and inputting ticket code
+      Scanner info = new Scanner(System.in);
+      String ticketCode = ("");
+      String game = ("");
+      String day = ("");
+      String month = ("");
+      String year = ("");
+      String hour = ("");
+      String minute = ("");
+      String section = ("");
+      System.out.print("Enter your ticket code: ");
+      ticketCode = info.nextLine();
+      //trimmed input to make sure no white spaces are used
+      //also makes sure there is correct input
+      ticketCode = ticketCode.trim();
+      if (ticketCode.length() < 25) {
+         System.out.println("\nInvalid Ticket Code."
+            + "\nTicket code must have at least 25 characters.");
+      } else {
+      //prints out who is playing the game
+         game = ticketCode.substring(24, ticketCode.length());
+         System.out.print("\nGame: " + game);
+      //prints out the date of the game
+         month = ticketCode.substring(10, 12);
+         day = ticketCode.substring(12, 14);
+         year = ticketCode.substring(14, 18);
+         System.out.print("   Date: " + month + "/" + day + "/" + year);
+      //prints out the time of the game
+         hour = ticketCode.substring(6, 8);
+         minute = ticketCode.substring(8, 10);
+         System.out.print("   Time: " + hour + ":" + minute);
+      //prints out the section
+         DecimalFormat sec = new DecimalFormat("##");
+         section = ticketCode.substring(22, 24);
+         int intSection = Integer.parseInt(section);
+         System.out.print("\nSection: " + sec.format(intSection));
+      //prints out the row
+         System.out.print("   Row: " + ticketCode.substring(20, 22));
+      //prints out the seat
+         System.out.println("   Seat: " + ticketCode.substring(18, 20));
+      //prints out the price/category/actual cost
+         DecimalFormat df = new DecimalFormat("$#.00");
+         double fullPrice = Double.parseDouble(ticketCode.substring(1, 4));
+         double actualPrice = Double.parseDouble(ticketCode.substring(1, 4));
+         if (ticketCode.charAt(0) == 'r') {
+            System.out.print("Price: " + df.format(fullPrice)
+               + "   Category: " + ticketCode.charAt(0)
+               + "   Cost: " + df.format(actualPrice));
+         } else if (ticketCode.charAt(0) == 's') {
+            actualPrice = fullPrice * STUDENT_DISCOUNT;
+            System.out.print("Price: " + df.format(fullPrice)
+               + "   Category: " + ticketCode.charAt(0)
+               + "   Cost: " + df.format(actualPrice));
+         } else if (ticketCode.charAt(0) == 'f') {
+            actualPrice = fullPrice * FACULTY_STAFF_DISCOUNT;
+            System.out.print("Price: " + df.format(fullPrice)
+               + "   Category: " + ticketCode.charAt(0)
+               + "   Cost: " + df.format(actualPrice));
+         }
+         //calculates the random prize number
+         double prizeNum = Math.random() * Math.pow(10, 7);
+         DecimalFormat pn = new DecimalFormat("0000000");
+         System.out.print("\nPrize Number: " + pn.format(prizeNum));
+      }
+   }
+}
