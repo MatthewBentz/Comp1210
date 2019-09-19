@@ -1,0 +1,46 @@
+/** Class that represents an inventory item.
+ *Activity 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/5/18
+ */
+ 
+ /** Class. */
+public class InventoryItem {
+   protected String name;
+   protected double price;
+   private static double taxRate = 0;
+   
+   /** Constructor.
+    *@param nameIn parameter for name.
+    *@param priceIn parameter for price. */
+   public InventoryItem(String nameIn, double priceIn) {
+      name = nameIn;
+      price = priceIn;
+   }
+   
+   /** Accessor method for name.
+    *@return name returns name of item in string. */
+   public String getName() {
+      return name;
+   }
+   
+   /** Method that returns price + tax.
+    *@return returns price of item as double. */
+   public double calculateCost() {
+      return price * (1 + taxRate);
+   }
+   
+   /** Sets the tax rate. @param taxRateIn new rate. */
+   public static void setTaxRate(double taxRateIn) {
+      taxRate = taxRateIn;
+   }
+   
+   /** Info turns into string.
+    *@return returns info as string. */
+   public String toString() {
+      return name + ": $" + calculateCost();
+   }
+ 
+ 
+ 
+}
