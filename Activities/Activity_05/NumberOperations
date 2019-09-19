@@ -1,0 +1,66 @@
+/**NumberOps class to define variables used in driver.
+ *Activity 5
+ *@mlb0119 Matthew Bentz
+ *@version 10/1/18
+ */
+ 
+public class NumberOperations {
+   private int number;
+   
+   /**Constructor. @param numberIn is a int for operating. */
+   public NumberOperations(int numberIn) {
+      number = numberIn;
+   }
+   
+   /**Accessor returns int of the value. @return returns calculated value. */
+   public int getValue() {
+      return number;
+   }
+   
+   /**Method returns a string. @return returns a string. */
+   public String oddsUnder() {
+      String output = "";
+      int i = 0;
+      while (i < number) {
+         if (i % 2 != 0) {
+            output += i + "\t";
+         }
+         i++;
+      }
+      return output;
+   }
+   
+   /**Method returns a string. @return returns a string. */
+   public String powersTwoUnder() {
+      String output = "";
+      int powers = 1;
+      while (powers < number) {
+         output += powers + "\t";
+         powers = powers * 2;
+      }
+      return output;
+   }
+   
+   /**Method takes int parameter, returns an int.
+    *@param compareNumber int value to compare input.
+    *@return int value after comparison. */
+   public int isGreater(int compareNumber) {
+      if (number > compareNumber) {
+         return 1;
+      } else if (number < compareNumber) {
+         return -1;
+      } else {
+         return 0;
+      }
+   }
+    
+    /**Method that turns class into a string. @return for the string. */
+   public String toString() {
+      return number + "";
+   }
+ 
+ 
+ 
+ 
+ 
+}
