@@ -1,0 +1,24 @@
+/** Driver class and main method. 
+ *Activity 10
+ *@mlb0119
+ *@version 11.12.18 */
+ 
+ /** Class. */
+public class InventoryListApp {
+   /** Main method. @param args not used. */
+   public static void main(String[] args) {
+      InventoryItem.setTaxRate(0.05);
+      ItemsList myItems = new ItemsList();
+      ElectronicsItem laptop = new ElectronicsItem("laptop", 1234.56, 10);
+      myItems.addItem(laptop);
+      InventoryItem motorOil = new InventoryItem("motor oil", 9.8);
+      myItems.addItem(motorOil);
+      OnlineBook javaBook = new OnlineBook("All Things Java", 12.3);
+      myItems.addItem(javaBook);
+      OnlineArticle article = new OnlineArticle("Useful Acronyms", 3.4);
+      myItems.addItem(article);
+      System.out.println(myItems.toString());
+      System.out.println("Total: " + myItems.calculateTotal(2.0));
+      
+   }
+}
