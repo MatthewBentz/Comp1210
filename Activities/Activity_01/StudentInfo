@@ -1,0 +1,17 @@
+/** Program prints the individual's student information.
+ *Activity 1
+ *@mlb0119 Matthew Bentz Comp 1210
+ *@version 8/27/18
+ */
+public class StudentInfo
+{
+/** Prints name of student and previous courses.
+*@param args Command line arguments - not used.
+*/
+   public static void main(String[]args)
+   {
+      System.out.println("Name: Matthew Bentz");
+      System.out.println("Previous Computer Courses:");
+      System.out.println("   AP Computer Science");
+   }
+}
