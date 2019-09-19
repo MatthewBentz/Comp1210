@@ -1,0 +1,51 @@
+/** Holds arrays of inventory items. 
+ *Activity 10
+ *@mlb0119
+ @version 11/12/18 */
+ 
+ 
+ /** Class. */
+public class ItemsList {
+   /** Fields. */
+   private InventoryItem[] inventory;
+   private int count;
+   
+   /** Constructor. */
+   public ItemsList() {
+      inventory = new InventoryItem[20];
+      count = 0;
+   }
+   
+   /** Method to add item.
+    *@param itemIn new item to add. */
+   public void addItem(InventoryItem itemIn) {
+      inventory[count] = itemIn;
+      count++;
+   }
+   
+   /** Method to calculate total cost of items.
+    *@param electronicsSurcharge makes no sense.
+    *@return total cost. */
+   public double calculateTotal(double electronicsSurcharge) {
+      double total = 0;
+      for (int i = 0; i < count; i++) {
+         if (inventory[i] instanceof ElectronicsItem) {
+            total += inventory[i].calculateCost() + electronicsSurcharge;
+         } else {
+            total += inventory[i].calculateCost();
+         }
+      }
+      return total;
+   }
+   
+   /** Inventory but in string cheese form.
+    *@return cheese. */
+   public String toString() {
+      String output = "All inventory:\n\n";
+      for (int i = 0; i < count; i++) {
+         output += inventory[i].toString() + "\n";
+      }
+      
+      return output;
+   }
+}
