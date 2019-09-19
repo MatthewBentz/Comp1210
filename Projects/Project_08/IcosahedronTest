@@ -1,0 +1,91 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+/**Tester for the Icosahedron Class. */
+public class IcosahedronTest {
+   
+   private static Icosahedron icoTest = new Icosahedron("", "", 1);
+
+   /** Fixture initialization (common initialization
+    *  for all tests). **/
+   @Before public void setUp() {
+   }
+   
+   /**Tests for the setter and getter methods. */
+   @Test public void settersandgettersTest() {
+      
+      Assert.assertEquals("False Label Test", false, icoTest.setLabel(null));
+      icoTest.setLabel("Small");
+      Assert.assertEquals("Label test", "Small", icoTest.getLabel());
+      
+      icoTest.resetCount();
+      Assert.assertEquals("Reset count Test", 0, icoTest.getCount());
+      
+      Assert.assertEquals("False Color Test", false, icoTest.setColor(null));
+      icoTest.setColor("Red");
+      Assert.assertEquals("Color Test", "Red", icoTest.getColor());
+      
+      Assert.assertEquals("False Edge Test", false, icoTest.setEdge(0));
+      icoTest.setEdge(2);
+      Assert.assertEquals("Edge Test", 2, icoTest.getEdge(), 0.0001);
+      
+      Assert.assertEquals("Surface Area Test", 34.64101,
+                              icoTest.surfaceArea(), 0.0001);
+      Assert.assertEquals("Volume Test", 17.45355,
+                              icoTest.volume(), 0.0001);
+      Assert.assertEquals("Surface to Volume Test", 1.98475,
+                              icoTest.surfaceToVolumeRatio(), 0.0001);
+   }
+   
+   /**String and equals method tester. */
+   @Test public void equalsTest() {
+   
+      Icosahedron ico1 = new Icosahedron("Large", "Blue", 10);
+      Icosahedron ico2 = new Icosahedron("Large", "Blue", 10);
+      Assert.assertEquals("Equals Test", true, ico1.equals(ico2));
+      
+      ico2 = new Icosahedron("Not Large", "Blue", 10);
+      Assert.assertEquals("Equals false test", false, ico1.equals(ico2));
+      
+      ico2 = new Icosahedron("Large", "Green", 10);
+      Assert.assertEquals("Equals false test", false, ico1.equals(ico2));
+      
+      ico2 = new Icosahedron("Large", "Blue", 12);
+      Assert.assertEquals("Equals false test", false, ico1.equals(ico2));
+      
+      Assert.assertEquals("Equals false test", false, ico1.equals("meme"));
+   }
+   
+   /**Tests toString method. */
+   
+   @Test public void toStringTest() {
+   
+      Icosahedron ico = new Icosahedron("Medium", "Navy", 3);
+      
+      Assert.assertEquals("toString Test", true, ico.toString().contains(
+            "Icosahedron \"Medium\" is \"Navy\" with 30 edges of length 3.0 "
+            + "units.\n\t" + "surface area = 77.942286 square units\n\t"
+            + "volume = 58.905765 cubic units\n\t"
+            + "surface/volume ratio = 1.323169"));
+            
+   }
+   /**Tester to make checkstyle happy I think. */
+   @Test public void hashCodeTest() {
+      Assert.assertEquals("equals false test", 0, icoTest.hashCode());
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   /** A test that always fails.
+   @Test public void defaultTest() {
+      Assert.assertEquals("Default test added by jGRASP. Delete "
+            + "this test once you have added your own.", 0, 1);
+   } **/
+}
