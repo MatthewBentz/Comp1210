@@ -1,0 +1,27 @@
+/**Extends inventory item and creates electronics items.
+ *Activity 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/5/18
+ */
+ 
+ /** Class. */
+public class ElectronicsItem extends InventoryItem {
+   protected double weight;
+   /**@value SHIPPING_COST static cost by weight of item. */
+   public static final double SHIPPING_COST = 1.5;
+   
+   /** Constructor.
+    *@param nameIn for name.
+    *@param priceIn for price.
+    *@param weightIn for weight. */
+   public ElectronicsItem(String nameIn, double priceIn, double weightIn) {
+      super(nameIn, priceIn);
+      weight = weightIn;  
+   }
+   
+   /** Overrides the calculateCost method in InventoryItem class. 
+    *@return returns a price that accounts for shipping. */
+   public double calculateCost() {
+      return super.calculateCost() + (SHIPPING_COST * weight);
+   }
+}
