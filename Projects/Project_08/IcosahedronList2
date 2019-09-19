@@ -1,0 +1,347 @@
+/** Icosahedron List pulls file names.
+ *Project 5
+ *@mlb0119 Matthew Bentz
+ *@version 10/3/18
+ */
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+ 
+ 
+ /** Javadoc comment for checkstyle to stop being mean.*/
+public class IcosahedronList2 {
+   private String listOfIcosahedrons = "";
+   private int numOfIcos = 0;
+   private Icosahedron[] icoList = new Icosahedron[100];
+   
+   
+   /** constructor.
+    *@param listOfIcosahedronsIn temp placement for list.
+    *@param icoListIn temp placement for array.
+    *@param numOfIcosIn temp placement for number of icos in array. */
+   public IcosahedronList2(String listOfIcosahedronsIn,
+       Icosahedron[] icoListIn, int numOfIcosIn) {
+      listOfIcosahedrons = listOfIcosahedronsIn;
+      icoList = icoListIn;
+      numOfIcos = numOfIcosIn;
+   }
+   
+   /** accessor method for name.
+    *@return returns name in String. */
+   public String getName() {
+      return listOfIcosahedrons;
+   }
+   
+   /** accessor method for number of icosahedrons.
+    *@return returns int value for numoficos. */
+   public int numberOfIcosahedrons() {
+      if (icoList.length > 0) {
+         return numOfIcos;
+      } else {
+         return 0;
+      }
+   }
+      
+   /** adds total surface areas for all icosahedrons.
+    *@return returns double for total surface area. */
+   public double totalSurfaceArea() {
+      double totalSurfaceArea = 0;
+      if (numOfIcos > 0) {
+         for (int i = 0; i < numOfIcos; i++) {
+            totalSurfaceArea += icoList[i].surfaceArea();
+         }
+         return totalSurfaceArea;
+      } else {
+         return totalSurfaceArea;
+      }   
+   } 
+   
+   /** adds all icosahedron volumes.
+    *@return returns double for calculated total volume. */
+   public double totalVolume() {
+      double totalVolume = 0;
+      if (numOfIcos > 0) {
+         int index = 0;
+         while (index < numOfIcos) {
+            totalVolume += icoList[index].volume();
+            index++;
+         }
+         return totalVolume;
+      } else {
+         return totalVolume;
+      }
+   }
+   
+   /** calculates the value of the avg. surface area.
+    *@return returns average surface area as double. */
+   public double averageSurfaceArea() {
+      double totalSurfaceArea = 0;
+      double averageSurfaceArea = 0;
+      if (numOfIcos > 0) {
+         int index = 0;
+         while (index < numOfIcos) {
+            totalSurfaceArea += icoList[index].surfaceArea();
+            index++;
+         }
+         averageSurfaceArea = totalSurfaceArea / numOfIcos;
+         return averageSurfaceArea;
+      } else {
+         return averageSurfaceArea;
+      }
+   }
+   
+   /** calculates the average volume and returns it as a double.
+    *@return returns double for average volume. */
+   public double averageVolume() {
+      double averageVolume = 0;
+      double totalVolume = 0;
+      if (numOfIcos > 0) {
+         int index = 0;
+         while (index < numOfIcos) {
+            totalVolume += icoList[index].volume();
+            index++;
+         }
+         totalVolume /= numOfIcos;
+         return totalVolume;
+      } else {
+         return totalVolume;
+      }
+   }
+   
+   /** calculates average surface to volume ratio and returns double.
+    *@return returns average surface to volume ratio as double. */
+   public double averageSurfaceToVolumeRatio() {
+      double totalSurfaceToVolumeRatio = 0;
+      double averageSurfaceToVolumeRatio = 0;
+      if (numOfIcos > 0) {
+         int index = 0;
+         while (index < numOfIcos) {
+            totalSurfaceToVolumeRatio += 
+               icoList[index].surfaceToVolumeRatio();
+            index++;
+         }
+         averageSurfaceToVolumeRatio = 
+            totalSurfaceToVolumeRatio / numOfIcos;
+         return averageSurfaceToVolumeRatio;
+      } else { 
+         return averageSurfaceToVolumeRatio;
+      }
+   }
+   
+   /**returns a String containing the name of the list with each Icosahedron.
+    *@return returns the icosahedron info as String. */
+   public String toString() {
+      String result = listOfIcosahedrons + "\n\n";
+      int index = 0;
+      if (numOfIcos > 0) {
+         while (index < numOfIcos) {
+            result += icoList[index].toString() + "\n";
+            index++;
+         } 
+      }
+      return result;
+   }
+   
+   /**returns a String containing the name of the list with summary items.
+    *@return returns a string containing summary info. */
+   public String summaryInfo() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      
+      String result = "----- Summary for " + listOfIcosahedrons + " -----\n";
+      result += "Number of Icosahedrons: " + numOfIcos + "\n";
+      result += "Total Surface Area: " + df.format(totalSurfaceArea()) + "\n";
+      result += "Total Volume: " + df.format(totalVolume()) + "\n";
+      result += "Average Surface Area: "
+          + df.format(averageSurfaceArea()) + "\n";
+      result += "Average Volume: " + df.format(averageVolume()) + "\n";
+      result += "Average Surface/Volume Ratio: "
+          + df.format(averageSurfaceToVolumeRatio());
+      return result;   
+   }
+   
+   /**Accessor method for @return returning ArrayList of Ico objects. */
+   public Icosahedron[] getList() {
+      return icoList;
+   }
+   
+   /**Reads files I think. 
+    *@param fileNameIn for representing filename.
+    *@return returns an arraylist for icosahedrons in file.
+    *@throws FileNotFoundException xd. */
+   public IcosahedronList2 readFile(String fileNameIn) 
+                                           throws FileNotFoundException {
+      Scanner scanFile = new Scanner(new File(fileNameIn));
+      Icosahedron[] fileList = new Icosahedron[20];
+      String color, label;
+      double edge;
+      String listName = "";
+      
+      listName = scanFile.nextLine();
+      if (scanFile.hasNext()) {
+         for (int index = 0; scanFile.hasNext(); index++) {
+            label = scanFile.nextLine();
+            color = scanFile.nextLine();
+            edge = Double.parseDouble(scanFile.nextLine());
+            Icosahedron i = new Icosahedron(label, color, edge);
+            fileList[index] = i;
+            numOfIcos++;
+         }
+      }
+      IcosahedronList2 newList = new
+                            IcosahedronList2(listName, fileList, numOfIcos);
+      return newList;
+   }
+   
+   /**Creates a new icosahedron object.
+    *@param labelIn label parameter
+    *@param colorIn label parameter
+    *@param edgeIn edge parameter */
+   public void addIcosahedron(String labelIn, String colorIn, double edgeIn) {
+      Icosahedron addedIco = new Icosahedron(labelIn, colorIn, edgeIn);
+      icoList[numOfIcos] = addedIco;
+      numOfIcos++;
+      /**Icosahedron[] newIcoList = new Icosahedron[numOfIcos + 1];
+      for (int i = 0; i < icoList.length; i++) {
+         newIcoList[i] = icoList[i];
+      }
+      
+      numOfIcos++;
+      newIcoList[numOfIcos - 1] = addedIco;
+      icoList = newIcoList; */
+      
+   }
+   
+   /**Finds designated object in varying lists.
+    *@return returns null or the Icosahedron object with same name.
+    *@param labelIn label parameter */
+   public Icosahedron findIcosahedron(String labelIn) {
+      Icosahedron found = null;
+      for (int i = 0; i < numOfIcos; i++) {
+         if (icoList[i].getLabel().toUpperCase().equals(
+                                       labelIn.toUpperCase())) {
+            found = icoList[i];
+         }
+      }
+      return found;
+   }
+   
+   /**Deletes an Icosahedron object if found.
+    *@return returns either the found icosahedron or null.
+    *@param label label parameter */
+   public Icosahedron deleteIcosahedron(String label) {
+      Icosahedron delete = null;
+      //Icosahedron[] newIcoList = new Icosahedron[numOfIcos - 1];
+      //newIcoList = icoList;
+   
+      if (findIcosahedron(label) != null) {
+      
+         delete = findIcosahedron(label);
+         
+         for (int i = 0; i < numOfIcos; i++) {
+         
+            if (icoList[i].equals(findIcosahedron(label))) {
+            
+               while (i < numberOfIcosahedrons() - 1) {
+               
+                  icoList[i] = icoList[i + 1];
+                  i++;
+               }
+            }
+            icoList[numberOfIcosahedrons() - 1] = null;
+            numOfIcos--;
+           
+            //icoList = newIcoList;
+         }
+      }
+      return delete;
+   }
+   
+   /**Mutator method for icosahedrons in the array.
+    *@return returns true or false if found.
+    *@param labelIn label parameter
+    *@param colorIn color parameter
+    *@param edgeIn edge parameter */
+   public boolean editIcosahedron(String labelIn,
+                                       String colorIn, double edgeIn) {
+      if (findIcosahedron(labelIn) != null) {
+         findIcosahedron(labelIn).setColor(colorIn);
+         findIcosahedron(labelIn).setEdge(edgeIn);
+         return true;
+      } else {
+         return false;
+      }
+   }
+   
+   /**Method to find Icosahedron with the shortest edge.
+    *@return returns ico with smallest edge.
+    */
+   public Icosahedron findIcosahedronWithShortestEdge() {
+      if (numOfIcos > 0) {
+         Icosahedron smallEdge = icoList[1];
+         for (int i = 0; i < numOfIcos; i++) {
+            if (icoList[i].getEdge() < smallEdge.getEdge()) {
+               smallEdge = icoList[i];
+            }
+         }
+      //return smallEdge;
+         return smallEdge;
+      } else {
+         return null;
+      }
+   }
+   
+   /**Method to find icosahedron with the longest edge. 
+    *@return returns the icosahedron.
+    */
+   public Icosahedron findIcosahedronWithLongestEdge() {
+      if (numOfIcos > 0) {
+         Icosahedron longEdge = icoList[1];
+         for (int i = 0; i < numOfIcos; i++) {
+            if (icoList[i].getEdge() > longEdge.getEdge()) {
+               longEdge = icoList[i];
+            }
+         }
+      
+         return longEdge;
+      } else {
+         return null;
+      }
+   }
+   
+   /**Method to find the icosahedron with the smallest volume.
+    *@return returns the icosahedron. 
+    */
+   public Icosahedron findIcosahedronWithSmallestVolume() {
+      if (numOfIcos > 0) {
+         Icosahedron smallVolume = icoList[1];
+         for (int i = 0; i < numOfIcos; i++) {
+            if (icoList[i].volume() < smallVolume.volume()) {
+               smallVolume = icoList[i];
+            }
+         }
+         return smallVolume;
+      } else {
+         return null;
+      }
+   }
+   
+   /**Method to find the icosahedron with the largest volume. 
+    *@return returns the icosahedron when found. 
+    */
+   public Icosahedron findIcosahedronWithLargestVolume() {
+      if (numOfIcos > 0) {
+         Icosahedron largeVolume = icoList[1];
+         for (int i = 0; i < numOfIcos; i++) {
+            if (icoList[i].volume() > largeVolume.volume()) {
+               largeVolume = icoList[i];
+            }
+         }
+         return largeVolume;
+      } else {
+         return null;
+      }
+   }
+
+}
