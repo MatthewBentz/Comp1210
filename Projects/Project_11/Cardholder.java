@@ -1,0 +1,204 @@
+/** Cardholder placeholder class.
+ *Project 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/7/18 */
+ 
+import java.util.Arrays;
+import java.text.DecimalFormat;
+ 
+ /** Highest parent class. */
+public abstract class Cardholder implements Comparable<Cardholder> {
+
+  /** Fields. */
+   protected String category;
+   protected String acctNumber;
+   protected String name;
+   protected double prevBalance;
+   protected double payment = 0;
+   protected double[] purchases;
+   /** @value INTEREST_RATE static interest. */
+   public static final double INTEREST_RATE = 0.01;
+   
+   /** Constructor.
+    *@param acctNumberIn for account number.
+    *@param nameIn for account name. */ 
+   public Cardholder(String acctNumberIn, String nameIn) {
+      acctNumber = acctNumberIn;
+      name = nameIn;
+      purchases = new double[0];
+   }
+   
+   /** Getter for account number.
+    *@return string for account number. */
+   protected String getAcctNumber() {
+      return acctNumber;
+   }
+   
+   /** Setter for account number. */
+   protected void setAcctNumber(String acctNumberIn) {
+      acctNumber = acctNumberIn;
+   }
+   
+   /** Getter for name field. 
+    *@return string for name. */
+   protected String getName() {
+      return name;
+   }
+    
+    /** Setter for name field. */
+   protected void setName(String nameIn) {
+      name = nameIn;
+   }
+   
+   /** Getter for previous balance field.
+    *@return double value for balance. */
+   protected double getPrevBalance() {
+      return prevBalance;
+   }
+    
+    /** Setter for previous balance field. */
+   protected void setPrevBalance(double prevBalanceIn) {
+      prevBalance = prevBalanceIn;
+   }
+   
+   /** Getter for payments.
+    *@return double for payment. */
+   protected double getPayment() {
+      return payment;
+   }
+    
+    /** Setter for payments. */
+   protected void setPayment(double paymentIn) {
+      payment = paymentIn;
+   }
+   
+   /** Getter for purchases.
+    *@return double[] for purchases made. */
+   protected double[] getPurchases() {
+      return purchases;
+   }
+   
+   /** Setter for purchases. */
+   protected void setPurchases(double... purchasesIn) {
+      purchases = Arrays.copyOf(purchases, purchasesIn.length);
+      for (int i = 0; i < purchasesIn.length; i++) {
+         purchases[i] = purchasesIn[i];
+      }
+   }
+   
+   /** Method to add purchases. */
+   protected void addPurchases(double... newPurchases) {
+      int l = purchases.length;
+      int k = newPurchases.length;
+      purchases = Arrays.copyOf(purchases, l + k);
+      for (int i = 0; i < k; i++) {
+         purchases[l + i] = newPurchases[i];
+      }
+   }
+   
+   /** Method to delete single purchase. */
+   protected void deletePurchase(double deletedPurchase) {
+      int l = purchases.length;
+      for (int i = 0; i < l; i++) {
+         if (deletedPurchase == purchases[i]) {
+            while (i < l - 1) {
+               purchases[i] = purchases[i + 1];
+               i++;
+            }
+            purchases[l - 1] = 0.0;
+            purchases = Arrays.copyOf(purchases, l - 1);
+         }
+      }
+      
+   }
+   
+   /** Method to delete multiple purchases. */
+   protected void deletePurchases(double... deletedPurchases) {
+      int l = purchases.length;
+      int e = deletedPurchases.length;
+      for (int i = 0; i < l; i++) {
+         for (int j = 0; j < e; j++) {
+            deletePurchase(deletedPurchases[j]);
+         } 
+      }
+   }
+   
+   /** Method to calculate interest rate. */
+   protected double interest() {
+      return (prevBalance - payment) * INTEREST_RATE;
+   }
+   
+   /** Method to return total purchases.
+    *@return total amount from purchases. */
+   protected double totalPurchases() { 
+      int l = purchases.length;
+      double total = 0;
+      for (int i = 0; i < l; i++) {
+         total += purchases[i];
+      }
+      return total;
+   }
+   
+   /** Method to return balance.
+    *@return balance in account. */
+   protected double balance() {
+      return (prevBalance * INTEREST_RATE) + totalPurchases();
+   }
+   
+   /** Method to return current balance.
+    *@return current balance in account. */
+   protected double currentBalance() {
+      return prevBalance - payment + interest() + totalPurchases();
+   }
+   
+   /** Method to calculate minimum payment.
+    *@return minimum payment amount. */
+   protected double minPayment() {
+      return currentBalance() * 0.03;
+   }
+   
+   /** Method to return purchase points by type of card. */
+   protected abstract int purchasePoints();
+   
+   /** Method to create basic toString method.
+    *@return String value for cardholder info. */
+   public String toString() {
+      DecimalFormat df1 = new DecimalFormat("$#,##0.00");
+      DecimalFormat df2 = new DecimalFormat("#,##0");
+      return category + "\nAcctNo/Name: " + acctNumber + " " + name
+               + "\nPrevious Balance: " + df1.format(prevBalance)
+               + "\nPayment: (" + df1.format(payment) + ")"
+               + "\nInterest: " + df1.format(this.interest())
+               + "\nNew Purchases: " + df1.format(this.totalPurchases())
+               + "\nCurrent Balance: " + df1.format(this.currentBalance())
+               + "\nMinimum Payment: " + df1.format(this.minPayment())
+               + "\nPurchase Points: " + df2.format(this.purchasePoints());
+   }
+   
+   /** Compare method for comparing two accounts by name.
+    *@return returns -1 for "before", 0 for equal, and 1 for "after"
+    *@param obj2 is the object being compared. */
+   public int compareTo(Cardholder obj2) {
+      return name.compareToIgnoreCase(obj2.getName());
+   }
+   
+   /** Equals method.
+    *@param obj for cardholder.
+    *@return t/f if instance of cardholder. */
+   public boolean equals(Object obj) {
+      if (!(obj instanceof Cardholder)) {
+         return false;
+      }
+      else {
+         Cardholder c = (Cardholder) obj;
+         return (name.equalsIgnoreCase(c.getName()));
+      }
+   }
+   
+   /** Hash Code.
+    *@return zero. */
+   public int hashCode() {
+      return 0;
+   }
+ 
+}

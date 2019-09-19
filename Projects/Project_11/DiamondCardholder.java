@@ -1,0 +1,58 @@
+/** DiamondCardholder child class of cardholder.
+ *Project 9
+ *@mlb0119
+ *@version 11/10/18 */
+ 
+import java.text.DecimalFormat;
+ 
+ /** Child class of cardholder. */
+public class DiamondCardholder extends Cardholder {
+ /** Fields. */
+   protected double discountRate = 0.05;
+  /** Constructor.
+   *@param acctNumberIn for account number.
+   *@param nameIn for account name. */
+   public DiamondCardholder(String acctNumberIn, String nameIn) {
+      super(acctNumberIn, nameIn);
+      category = "Diamond Cardholder";
+   }
+   
+   /** Method to determine purchase points.
+    *@return int value for every dollar spent * 3. */
+   protected int purchasePoints() {
+      int points = (int) Math.floor(totalPurchases());
+      points *= 3;
+      return points;
+   }
+   
+   /** Method to set the discount rate.
+    *@param rateIn new rate. */
+   protected void setDiscountRate(double rateIn) {
+      discountRate = rateIn;
+   }
+   
+   /** Method to get the discount rate.
+    *@return current rate. */
+   protected double getDiscountRate() {
+      return discountRate;
+   }
+   
+   /** Overrides inherited method to include discount rate.
+    *@return the amount of total purchases - rate. */
+   protected double totalPurchases() {
+      double total = 0;
+      total = super.totalPurchases() * (1.0 - discountRate);
+      return total;
+   }
+   
+   /** Overrides parent toString to include discount rate.
+    *@return info as string. */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("0.0%");
+      DecimalFormat df1 = new DecimalFormat("$#,##0.00");
+      DecimalFormat df2 = new DecimalFormat("#,##0");
+      return super.toString()
+               + "\n(includes " + df.format(discountRate) + " discount rate "
+               + "applied to New Purchases)";
+   }
+}
