@@ -1,0 +1,30 @@
+/** Class that extends OnlineTextItem. 
+ *Activity 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/5/18
+ */
+ 
+ /** Class. */
+public class OnlineBook extends OnlineTextItem {
+   protected String author;
+   
+   /** Constructor.
+    *@param nameIn for name.
+    *@param priceIn for price. */
+   public OnlineBook(String nameIn, double priceIn) {
+      super(nameIn, priceIn);
+      author = "Author Not Listed";
+   }
+   
+   /**Overrides the InventoryItem's toString method. 
+    *@return returns author's name as well. */
+   public String toString() {
+      return name + " - " + author + ": $" + price;
+   }
+   
+   /** Mutator method for author.
+    *@param authorIn temp for name. */
+   public void setAuthor(String authorIn) {
+      author = authorIn;
+   }
+}
