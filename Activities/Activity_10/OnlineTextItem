@@ -1,0 +1,21 @@
+/** Class that extends InventoryItem.
+ *Activity 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/5/18
+ */
+ 
+ /**Abstract class. */
+public abstract class OnlineTextItem extends InventoryItem {
+   
+   /** Constructor. 
+    *@param nameIn follows InventoryItem.
+    *@param priceIn super as well. */
+   public OnlineTextItem(String nameIn, double priceIn) {
+      super(nameIn, priceIn);
+   }
+   /** Overrides calculateCost of InventoryItem class because no tax.
+    *@return returns price as double. */
+   public double calculateCost() {
+      return price;
+   }
+}
