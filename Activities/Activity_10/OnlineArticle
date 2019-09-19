@@ -1,0 +1,24 @@
+/** Class that extends InventoryItem.
+ *Activity 9
+ *@mlb0119 Matthew Bentz
+ *@version 11/5/18
+ */
+ 
+ /** Class. */
+public class OnlineArticle extends OnlineTextItem {
+   private int wordCount;
+   
+   /**Constructor. 
+    *@param nameIn super.
+    *@param priceIn super. */
+   public OnlineArticle(String nameIn, double priceIn) {
+      super(nameIn, priceIn);
+      wordCount = 0;
+   }
+   
+   /** Mutator method for setting word count.
+    *@param wordCountIn sets word count. */
+   public void setWordCount(int wordCountIn) {
+      wordCount = wordCountIn;
+   }
+}
