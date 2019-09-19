@@ -1,0 +1,44 @@
+/** Program is used to find the midpoint of a line segment.
+ *Project 2 pt.1
+ *@author mlb0119 Matthew Bentz
+ *@version 9/5/18
+ */
+//imports the utility for input of coordinates
+import java.util.Scanner;
+/**Defines class.
+ */
+public class MidpointOfLineSegment {
+   /**Class to define the program as a midpoint calculator.
+    *@param args Command line arguments - not used.
+    */
+   public static void main(String[]args) {
+   //declaring the variables to be used
+      double x1;
+      double x2;
+      double y1;
+      double y2;
+      double midpointX;
+      double midpointY;
+      Scanner coordinateInput = new Scanner(System.in);
+      //user inputs the coordinates of enpoint 1
+      System.out.println("Enter the coordinates for endpoint 1:");
+      System.out.print("\tx1 = ");
+      x1 = coordinateInput.nextDouble();
+      System.out.print("\ty1 = ");
+      y1 = coordinateInput.nextDouble();
+      //user inputs the coordinates of endpoint 2
+      System.out.println("Enter the coordinates for endpoint 2:");
+      System.out.print("\tx2 = ");
+      x2 = coordinateInput.nextDouble();
+      System.out.print("\ty2 = ");
+      y2 = coordinateInput.nextDouble();
+      //calculates x-value for midpoint
+      midpointX = (x1 + x2) / 2;
+      //calculates y-value for midpoint
+      midpointY = (y1 + y2) / 2;
+      //Prints out the solution.
+      System.out.println("For endpoints (" + x1 + ", " + y1 + ") and "
+         + "(" + x2 + ", " + y2 + "), the midpoint is (" + midpointX
+         + ", " + midpointY + ").");
+   }
+}
