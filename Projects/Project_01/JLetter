@@ -1,0 +1,25 @@
+/** Application shows a large block letter "J" 
+ *composed of the letters J,A,V, and A.
+ *Project_01
+ *@author mlb0119 Matthew Bentz
+ *@version 8/29/18
+ */
+public class JLetter 
+{
+/** Main method prints the JLetter by line.
+ *@param args Command line - not used.
+ */
+   public static void main(String[]args)
+   {
+      System.out.println("JAVAJAVAJAVA");
+      System.out.println("JAVAJAVAJAVA");
+      System.out.println("      JAVA");
+      System.out.println("      JAVA");
+      System.out.println("      JAVA");
+      System.out.println("      JAVA");
+      System.out.println("J     JAVA");
+      System.out.println("JA    JAVA");
+      System.out.println(" JAVAJAVA");
+      System.out.println("  JAVAJA");
+   }
+}
