@@ -1,0 +1,106 @@
+/** Programs defines classes that contain user info.
+ *Activity 4 pt. 1
+ *@mlb0119 Matthew Bentz
+ *@version 9/17/18
+ */
+public class UserInfo {
+ 
+   // instance variables
+   
+   private static final int OFFLINE = 0, ONLINE = 1;
+   private String firstName;
+   private String lastName;
+   private String location;
+   private int age;
+   private int status;
+   
+   // consructor
+ 
+   /** Class defines the User by first and last name. 
+    * @param firstNameIn User's first name in string form.
+    * @param lastNameIn User's last name in string form.
+    */
+   public UserInfo(String firstNameIn, String lastNameIn) {
+      
+      firstName = firstNameIn;
+      lastName = lastNameIn;
+      location = "Not specified";
+      age = 0;
+      status = OFFLINE;
+      
+   }
+   
+   // methods
+   
+   /** Class makes the information stringy. 
+    *@return output Returns user's info as a string.
+    */
+   public String toString() {
+    
+      String output = "Name: " + firstName + " "
+         + lastName + "\n";
+      output += "Location: " + location + "\n";
+      output += "Age: " + age + "\n";
+      output += "Status: ";
+      
+      if (status == OFFLINE) {
+         output += "Offline";
+      } else if (status == ONLINE) {
+         output += "Online";
+      }
+      
+      return output;
+      
+   }
+   
+   /** Command line to set the user's location. 
+    *@param locationIn String that sets user's location.
+    */
+   public void setLocation(String locationIn) 
+   {
+      location = locationIn;  
+   }
+   
+   /** Boolean checks if age is over 0, then sets it to age.
+    *@return Returns true or false value for boolean isSet.
+    *@param ageIn Integer set for user's age.
+    */
+   public boolean setAge(int ageIn) {
+      
+      boolean isSet = false;
+      if (ageIn > 0) {
+         age = ageIn;
+         isSet = true;
+      }
+      return isSet;
+      
+   }
+   
+   /** Class returns the value of age. 
+    *@return age Returns integer value for getAge.
+    */
+   public int getAge() 
+   {   
+      return age;  
+   }
+   
+   /** Class returns the value of location.
+    *@return location Returns user's string value location for getLocation.
+    */
+   public String getLocation() 
+   {
+      return location;
+   }
+   
+   /** Command to set the user to offline. */
+   public void logOff() 
+   {   
+      status = OFFLINE;  
+   }
+   
+   /** Command to set the user to online. */
+   public void logOn() 
+   {
+      status = ONLINE;
+   }
+}
