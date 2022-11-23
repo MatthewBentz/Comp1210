@@ -4,7 +4,7 @@ Fundamentals of Computing 1 with Dr. Cross at Auburn University
 Coded in jGRASP
 
 ```
-    Total Views per Day from 2022-09-08 to 2022-11-22
+    Total Views per Day from 2022-09-08 to 2022-11-23
 
     Repository Views
    65.00  ┼                                                                ╭╮
@@ -21,10 +21,10 @@ Coded in jGRASP
    17.33  ┤│      ╭╮                          ╭╮ │╰╮      │││ │  │╰╯│ ╭╯││  ││  │││
    13.00  ┤│      ││         ╭╮               ││ │ │ ╭─╮  │││ ╰╮ │  │ │ ╰╯  ││  │││
     8.67  ┤│ ╭╮╭╮ ││  ╭╮ ╭╮╭╮││            ╭╮ │╰╮│ │ │ │  │││  ╰╮│  │ │     ╰╯  ╰╯│
-    4.33  ┤│ ││││╭╯│╭─╯│ │╰╯│││  ╭╮        ││╭╯ ╰╯ ╰╮│ │  │││   ╰╯  ╰╮│           │
-    0.00  ┤╰─╯╰╯╰╯ ╰╯  ╰─╯  ╰╯╰──╯╰────────╯╰╯      ╰╯ ╰──╯╰╯        ╰╯           ╰───
+    4.33  ┤│ ││││╭╯│╭─╯│ │╰╯│││  ╭╮        ││╭╯ ╰╯ ╰╮│ │  │││   ╰╯  ╰╮│           │  ╭╮
+    0.00  ┤╰─╯╰╯╰╯ ╰╯  ╰─╯  ╰╯╰──╯╰────────╯╰╯      ╰╯ ╰──╯╰╯        ╰╯           ╰──╯╰
 
-    Chart last updated - Tue Nov 22 00:32:14 2022 UTC
+    Chart last updated - Wed Nov 23 00:26:42 2022 UTC
     
 ```
 
