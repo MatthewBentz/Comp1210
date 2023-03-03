@@ -3,7 +3,7 @@ Fundamentals of Computing 1 with Dr. Cross at Auburn University
 
 Coded in jGRASP
 
-![Views Chart](https://repostatscharts.s3.us-east-2.amazonaws.com/MatthewsRepos/Comp1210_ViewsChart.png)
+![Views Chart](https://repostatscharts.s3.us-east-2.amazonaws.com/MatthewsRepos/Comp1210_ViewsChart.png?)
 
 ---
 
